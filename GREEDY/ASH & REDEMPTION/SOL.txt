@@ -1,0 +1,40 @@
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.toList;
+
+public class Main{ public static void main(String[] args)throws IOException{
+        BufferedReader bf=new BufferedReader(new InputStreamReader(System.in));
+        int tc=Integer.parseInt(bf.readLine().trim());
+        for(int i=0;i<tc;i++){
+            int n=Integer.parseInt(bf.readLine().trim());
+
+            int[] ash=Stream.of(bf.readLine().trim().split(" "))
+        .mapToInt(s->Integer.parseInt(s)).toArray();
+        
+        int[] gary=Stream.of(bf.readLine().trim().split(" "))
+        .mapToInt(s->Integer.parseInt(s)).toArray();
+        
+        Arrays.sort(ash);
+        Arrays.sort(gary);
+        check(ash,gary,n);
+        }
+        
+        
+
+}
+public static void check(int[] ash, int[] gary, int n){
+    
+    for(int i=0;i<n;i++){
+        if(ash[i]<=gary[i]){
+            System.out.println("Train Hard Again");
+            return;
+        }
+    }
+                System.out.println("Ash Finally Wins");
+
+}
+
+
+
+}
