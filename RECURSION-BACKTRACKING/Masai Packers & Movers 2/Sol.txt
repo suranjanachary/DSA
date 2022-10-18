@@ -1,0 +1,53 @@
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.toList;
+
+    public class Main{  
+        
+    static int max=Integer.MIN_VALUE;
+    static int min=Integer.MAX_VALUE; 
+    
+    public static void main(String[] args)throws IOException{
+        
+         BufferedReader bf=new BufferedReader(new InputStreamReader(System.in));
+             int[] st=Stream.of(bf.readLine().trim().split(" "))
+            .mapToInt(s->Integer.parseInt(s)).toArray();
+        
+            int k=st[0];
+            int n=st[1];
+        
+         int[] arr=Stream.of(bf.readLine().trim().split(" "))
+        .mapToInt(s->Integer.parseInt(s)).toArray();
+        int count=0;
+        
+        masaiPackersMovers2(n,k,arr,count);
+        
+          if(max==Integer.MIN_VALUE && min==Integer.MAX_VALUE){
+              System.out.println(-1);
+          }
+          else{
+              System.out.println(min+" "+max);
+          }
+}
+
+
+
+  public static void masaiPackersMovers2(int n,int k,int[] arr,int count){
+  
+      if(k==0){
+            max=Math.max(max,count);
+            min=Math.min(min,count);
+            return ;
+        }
+        if(k<0){
+            return;
+        }
+        
+        for(int i=0;i<n;i++){
+            masaiPackersMovers2(n,k-arr[i],arr,count+1);
+        }
+
+    }
+
+}
