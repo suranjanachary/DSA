@@ -1,0 +1,54 @@
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.toList;
+
+public class Main{
+
+static int ans;
+
+public static void main(String[] args) throws IOException{
+        BufferedReader bf= new BufferedReader(new InputStreamReader(System.in));
+        
+       
+            int[] arr=Arrays.stream(bf.readLine().trim().split(" "))
+            .mapToInt(s->Integer.parseInt(s)).toArray();
+            int n= arr[0];
+            int m= arr[1];
+            int k= arr[2];
+           
+           HashMap <String,Integer> map =new HashMap<>();
+           
+            FollowTheKnight(n,m,k,map);
+            
+            System.out.println(map.size());
+        
+
+    }
+    
+    public static void FollowTheKnight(int n,int m,int k, HashMap<String,Integer>map){
+                
+                if(n<1 || n>10 || m<1 || m>10)
+                {
+                    return;
+                }
+                if(k==0)
+                {
+                   map.put(n+" "+m,1);
+                    
+                    return;
+                }
+                
+                FollowTheKnight(n+2,m+1,k-1,map);
+                FollowTheKnight(n+2,m-1,k-1,map);
+                FollowTheKnight(n-2,m+1,k-1,map);
+                FollowTheKnight(n-2,m-1,k-1,map);
+                FollowTheKnight(n+1,m+2,k-1,map);
+                FollowTheKnight(n-1,m+2,k-1,map);
+                FollowTheKnight(n+1,m-2,k-1,map);
+                FollowTheKnight(n-1,m-2,k-1,map);
+            }
+            
+      
+    }
+    

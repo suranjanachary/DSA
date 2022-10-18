@@ -1,0 +1,57 @@
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.toList;
+
+public class Main { public static void main(String[] args) throws IOException {
+      
+      BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+      
+      int n = Integer.parseInt(bf.readLine().trim());
+      int[][] matrix = new int[n][n];
+      
+      for(int i=0;i<n;i++) {
+          String[] strarr = bf.readLine().trim().split(" ");
+            int[] intarr=Arrays.stream(strarr).mapToInt(Integer::parseInt).toArray();
+            matrix[i]=intarr;
+      }
+      
+      ArrayList<String> foundPath= check(n,matrix);
+      
+      if(foundPath.size() == 0) {
+          System.out.println(-1);
+      }
+      else {
+          for( String s:foundPath) {
+              System.out.print(s + " ");
+          }
+      }
+  }
+    static ArrayList<String> res = new ArrayList<>();
+    
+    public static ArrayList<String> check(int n, int[][] mat){
+        if (mat[0][0]==0 || mat[n - 1][n - 1]== 0) {
+            return res;
+        }
+        path("", mat, 0, 0, n);
+        return res;
+    }
+    static void path(String ans,int[][] mat,int row,int col,int n) {
+        
+        if (row==n - 1 && col==n - 1) { 
+            res.add(ans); return;
+        }
+        if (mat[row][col] == 0) return;
+        
+        mat[row][col] = 0;
+        
+        if (row<n - 1) path(ans+'D',mat,row+1,col,n);
+        if (col<n - 1) path(ans+'R',mat,row,col+1,n);
+        if (row>0) path(ans+'U',mat,row-1, col, n);
+        if (col>0) path(ans+'L',mat,row, col-1, n);
+        
+        mat[row][col]=1;
+        
+    }
+ 
+}

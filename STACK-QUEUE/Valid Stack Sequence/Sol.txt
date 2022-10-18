@@ -1,0 +1,47 @@
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.toList;
+
+public class Main{ 
+    public static void main(String[] args)throws IOException{
+        BufferedReader bf=new BufferedReader(new InputStreamReader(System.in));
+        
+        
+        int tc=Integer.parseInt(bf.readLine());
+        for(int i=0;i<tc;i++){
+            int n=Integer.parseInt(bf.readLine());
+             List<Integer>list1=Stream.of(bf.readLine().trim().split(" "))
+            .map(Integer::parseInt).collect(Collectors.toList());
+        
+            List<Integer>list2=Stream.of(bf.readLine().trim().split(" "))
+            .map(Integer::parseInt).collect(Collectors.toList());
+        
+         validStackSeq(n,list1,list2);
+        }
+    
+}
+
+
+        public static void validStackSeq(int n,List<Integer> list1,List<Integer> list2){ 
+    
+        Stack<Integer>stk=new Stack<>();
+            for(int i=0;i<list1.size();i++){
+               while(stk.size()!=0 && stk.peek()==list2.get(0)) {
+               stk.pop();
+               list2.remove(0);
+                  }
+               stk.push(list1.get(i));
+             }
+     while(stk.size()!=0 && stk.peek()==list2.get(0)){
+           stk.pop(); 
+           list2.remove(0);
+        }
+        if(list2.size()!=0){
+            System.out.println("NO");
+        }
+        else{
+           System.out.println("YES"); 
+        }
+    }
+}
