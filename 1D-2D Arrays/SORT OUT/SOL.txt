@@ -1,0 +1,45 @@
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.toList;
+
+public class Main{ public static void main(String[] args)throws IOException{
+        BufferedReader bf=new BufferedReader(new InputStreamReader(System.in));
+        int size = Integer.parseInt(bf.readLine().trim());
+        int[] arr=Stream.of(bf.readLine().trim().split(" "))
+        .mapToInt(s->Integer.parseInt(s)).toArray();
+
+
+    int[] arr2=new int [size];
+    for(int i=0;i<size;i++)
+    {
+        arr2[i]=i;
+        
+    }
+    for(int i=0;i<size;i++)
+    {
+        for(int j=0;j<size-i-1;j++){
+            if(arr[j]>arr[j+1]){
+                swap(arr,arr2,j,j+1);
+            }
+        }
+    }
+    
+    for(int i:arr2){
+        System.out.print(i+" ");
+    }
+    
+    
+    
+}
+    
+    public static void swap(int[] arr,int[] arr2,int j,int inc){
+        int temp=arr[j];
+        arr[j]=arr[inc];
+        arr[inc]=temp;
+        int temp2=arr2[j];
+        arr2[j]=arr2[inc];
+        arr2[inc]=temp2;
+    }
+    
+}

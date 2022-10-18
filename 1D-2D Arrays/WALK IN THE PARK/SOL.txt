@@ -1,0 +1,57 @@
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.toList;
+
+public class Main{ public static void main(String[] args)throws IOException{
+        BufferedReader bf=new BufferedReader(new InputStreamReader(System.in));
+        int tc=Integer.parseInt(bf.readLine().trim());
+        for(int i=0;i<tc;i++){
+        int[] st=Stream.of(bf.readLine().trim().split(" "))
+        .mapToInt(s->Integer.parseInt(s)).toArray();
+        int n = st[0];
+        int m = st[1];
+        String[][] mat= new String[n][m];
+        for(int j=0;j<n;j++){
+            String[] str=bf.readLine().trim().split("");
+            mat[j]=str;
+        }
+        check(mat,n,m);
+        }
+}
+
+public static void check(String[][] mat, int n, int m){
+    
+ int count = 0;
+    int i = 0;
+    int j = 0;
+    while(i >= 0 && j >= 0 && i < n && j < m){
+            if (mat[i][j].equals("X")){
+                
+                
+                break;
+            } 
+            if (mat[i][j].equals("L")){
+                mat[i][j] = "X";
+                j--;
+            }
+            else if (mat[i][j].equals("R")){
+                mat[i][j] = "X";
+                j++;
+            }
+            else if (mat[i][j].equals("U")){
+                mat[i][j] = "X";
+                i--;
+            }
+            else{
+                mat[i][j] = "X";
+                i++;
+            }
+            count++;
+    }
+    System.out.println(count);
+ }  
+    
+      
+  }
+  
