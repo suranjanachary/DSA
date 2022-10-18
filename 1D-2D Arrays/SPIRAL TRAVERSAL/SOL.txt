@@ -1,0 +1,60 @@
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.toList;
+
+public class Main{ public static void main(String[] args)throws IOException{
+        BufferedReader bf=new BufferedReader(new InputStreamReader(System.in));
+        int tc=Integer.parseInt(bf.readLine().trim());
+        for(int i=0;i<tc;i++){
+        int[] st=Stream.of(bf.readLine().trim().split(" "))
+        .mapToInt(s->Integer.parseInt(s)).toArray();
+        int N = st[0];
+        int M = st[1];
+        int[][] matrix= new int[N][M];
+        for(int j=0;j<N;j++){
+         int[] str=Stream.of(bf.readLine().trim().split(" "))
+        .mapToInt(s->Integer.parseInt(s)).toArray();
+        matrix[j]=str;
+        }
+        
+        check(matrix,N,M);
+        }
+}
+  public static void check(int[][] matrix, int N, int M){  
+    int left=0;
+    int top=0;
+    int right=M-1;
+    int bottom=N-1;
+    int count=0;
+    StringBuilder sb = new StringBuilder();
+    while(count<N*M){
+        
+         for(int i=bottom;i>=top && count<N*M;i--){
+            sb.append(matrix[i][left]+" ");
+            count++;
+        }
+        left++;
+        
+        for(int i=left;i<=right && count<N*M;i++){
+            sb.append(matrix[top][i]+" ");
+            count++;
+        }
+        top++;
+        for(int i=top;i<=bottom && count<N*M;i++){
+            sb.append(matrix[i][right]+" ");
+            count++;
+        }
+        right--;
+        for(int i=right;i>=left && count<N*M;i--){
+            sb.append(matrix[bottom][i]+" ");
+            count++;
+        }
+        bottom--;
+       
+    }
+    
+    System.out.println(sb);
+  }
+
+}

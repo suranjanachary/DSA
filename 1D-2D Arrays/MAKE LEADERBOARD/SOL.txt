@@ -1,0 +1,73 @@
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.toList;
+
+public class Main{ public static void main(String[] args)throws IOException{
+        BufferedReader bf=new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(bf.readLine().trim());
+        String[] arr1=new String[n];
+        int[] arr2=new int[n];
+        for(int i=0;i<n;i++){
+        String[] st=bf.readLine().trim().split(" ");
+        arr1[i]=st[0];
+        arr2[i]=Integer.parseInt(st[1]);
+        }
+        
+        
+    
+    for(int i=0;i<n-1;i++){
+        for(int j=0;j<n-1-i;j++){
+            if(arr2[j]<arr2[j+1])
+            {
+                swap(arr1,arr2,j,j+1);
+            }
+        }
+    }
+    
+    
+    for(int i=0;i<n-1;i++){
+        for(int j=0;j<n-1-i;j++){
+            if(arr2[j]==arr2[j+1]){
+                int val=arr1[j].compareTo(arr1[j+1]);
+                if(val>0){
+                swap(arr1,arr2,j,j+1);
+               }
+            }
+        }
+    }
+    
+    
+    
+     int rank=1;
+    int count=0;
+    int prev=-1;
+  
+    for(int i=0;i<n;i++){
+         String bag="";
+        if(arr2[i]==prev){
+           bag=bag+rank+" "+arr1[i];
+        }
+        else{
+            bag=bag+(rank+count)+" "+arr1[i];
+            rank=rank+count;
+            count=0;
+        }
+        count++;
+        prev=arr2[i];
+        System.out.println(bag);
+    }
+    
+}
+
+public static void swap(String[] arr1,int[] arr2,int j,int inc){
+        int temp=arr2[j];
+        arr2[j]=arr2[inc];
+        arr2[inc]=temp;
+        
+        String temp2=arr1[j];
+        arr1[j]=arr1[inc];
+        arr1[inc]=temp2;
+    }
+   
+}
