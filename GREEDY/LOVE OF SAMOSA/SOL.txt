@@ -1,0 +1,31 @@
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.toList;
+
+public class Main{ public static void main(String[] args)throws IOException{
+        BufferedReader bf=new BufferedReader(new InputStreamReader(System.in));
+        int[] st=Stream.of(bf.readLine().trim().split(" "))
+        .mapToInt(s->Integer.parseInt(s)).toArray();
+        int n = st[0];
+        int k=st[1];
+        int[] arr=Stream.of(bf.readLine().trim().split(" "))
+        .mapToInt(s->Integer.parseInt(s)).toArray();
+        Arrays.sort(arr);
+        
+        int count=0;
+        for(int i=0;i<n;i++){
+            if(k>=arr[i]){
+                count++;
+                k-=arr[i];
+            }
+            else{
+                break;
+            }
+        }
+        System.out.println(count);
+        
+        
+
+}
+}

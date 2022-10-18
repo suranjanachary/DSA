@@ -1,0 +1,49 @@
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.toList;
+
+public class Main{ public static void main(String[] args)throws IOException{
+        BufferedReader bf=new BufferedReader(new InputStreamReader(System.in));
+        String[] st=bf.readLine().trim().split("");
+        if(st.length==1){
+            System.out.println(st[0]);
+            return;
+        }
+        
+        Stack<String> stk=new Stack<>();
+        
+        for(int i=0;i<st.length-1;i++){
+            if(st[i].equals("?")){
+                if(stk.size()==0 && st[i+1].equals("a")){
+                    stk.push("b");
+                }
+                else if(stk.size()==0){
+                    stk.push("a");
+                }
+                else if(stk.peek().equals("a") || st[i+1].equals("a")){
+                    stk.push("b");
+                }
+                else{
+                    stk.push("a");
+                }
+                
+            }
+            else{
+                stk.push(st[i]);
+            }
+        }
+        if(stk.peek().equals("a") && st[st.length-1].equals("?")){
+            stk.push("b");
+        }
+        else if(st[st.length-1].equals("?")){
+            stk.push("a");
+        }
+        else{
+            stk.push(st[st.length-1]);
+        }
+       stk.forEach(s->System.out.print(s));
+
+
+}
+}

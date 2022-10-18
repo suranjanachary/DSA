@@ -1,0 +1,30 @@
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.toList;
+
+public class Main{ public static void main(String[] args)throws IOException{
+        BufferedReader bf=new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(bf.readLine().trim());
+        int[] arr=Stream.of(bf.readLine().trim().split(" "))
+        .mapToInt(s->Integer.parseInt(s)).toArray();
+        
+        int sum=0;
+        for(int i=0;i<n;i++){
+            sum+=arr[i];
+        }
+        sum-=arr[0];
+        int sum2=0;
+        for(int i=1;i<n-1;i++){
+            sum-=arr[i];
+            sum2+=arr[i-1];
+            if(sum2==sum){
+                System.out.println(i+1);
+                return;
+            }
+            
+        }
+        System.out.println(-1);
+        
+}
+}
